@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday 🎉</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            color: white;
+            font-family: Arial;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            cursor: pointer;
+            background: purple;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday 🎉</h1>
+
+<p style="max-width:600px; margin:auto;">
+Hey… I made this just for you 💜<br><br>
+Out of everyone, you’re someone I really enjoy talking to.<br>
+I hope today feels special for you.<br><br>
+Keep being you 🌙
+</p>
+
+<hr>
+
+<h2>🎮 Birthday Challenge</h2>
+<p>Guess the number (1–100)<br>10 attempts | 3 hints</p>
+
+<input type="number" id="guess">
+<button onclick="check()">Guess</button>
+<button onclick="hint()">Hint</button>
+
+<p id="result"></p>
+<p id="attempts">Attempts: 0 / 10</p>
+<p id="hints">Hints left: 3</p>
+
+<script>
+let number = 47; // change this
+let tries = 0;
+let hintsLeft = 3;
+
+function check() {
+    if (tries >= 10) return;
+
+    let guess = Number(document.getElementById("guess").value);
+    tries++;
+
+    if (guess === number) {
+        document.getElementById("result").innerHTML = "🎉 YOU WIN!";
+    } 
+    else if (tries >= 10) {
+        document.getElementById("result").innerHTML = "💀 Game Over!";
+    }
+    else if (guess > number) {
+        document.getElementById("result").innerHTML = "Too high!";
+    } 
+    else {
+        document.getElementById("result").innerHTML = "Too low!";
+    }
+
+    document.getElementById("attempts").innerHTML = "Attempts: " + tries + " / 10";
+}
+
+function hint() {
+    if (hintsLeft <= 0) return;
+
+    hintsLeft--;
+
+    let msg = "";
+
+    if (hintsLeft === 2) {
+        msg = (number % 2 === 0) ? "EVEN number" : "ODD number";
+    } 
+    else if (hintsLeft === 1) {
+        msg = number > 50 ? "Greater than 50" : "50 or less";
+    } 
+    else {
+        msg = "Between " + (number-5) + " and " + (number+5);
+    }
+
+    document.getElementById("result").innerHTML = "💡 " + msg;
+    document.getElementById("hints").innerHTML = "Hints left: " + hintsLeft;
+}
+</script>
+
+</body>
+</html>
